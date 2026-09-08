@@ -1,11 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: django-deployment
-  labels:
-    app: django
+  name: django
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: django
@@ -15,7 +13,32 @@ spec:
         app: django
     spec:
       containers:
-      - name: django
-        image: Anjlesehrawat/django-app
-        ports:
-        - containerPort: 8000
+        - name: django
+          image: YOUR_DOCKERHUB_USERNAME/notes-app:latest
+          ports:
+            - containerPort: 8000
+
+          env:
+            - name: DB_HOST
+              value: mysql-service
+
+            - name: DB_PORT
+              value: "3306"
+
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_DATABASE
+
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
