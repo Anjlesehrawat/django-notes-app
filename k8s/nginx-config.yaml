@@ -4,6 +4,7 @@ kind: ConfigMap
 
 metadata:
   name: nginx-config
+  namespace: django
 
 data:
   default.conf: |
