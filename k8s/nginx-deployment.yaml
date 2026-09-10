@@ -4,16 +4,16 @@ metadata:
   name: nginx
   namespace: django
   labels:
-    app: django
+    app: nginx
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: django
+      app: nginx
   template:
     metadata:
       labels:
-        app: django
+        app: nginx
     spec:
       containers:
       - name: nginx
