@@ -8,7 +8,7 @@ metadata:
 
 spec:
   selector:
-    app: django
+    app: nginx
 
   ports:
     - port: 80
